@@ -3,6 +3,9 @@
 #define PONTOSINICIAIS 1000
 #define NUMEROSECRETO20 20
 
+/*
+lorem ipsum
+*/
 int chute;
 int tentativas = 1;
 int pontos = PONTOSINICIAIS;
