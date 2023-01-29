@@ -1,24 +1,27 @@
 #include <stdio.h>
 
-#define PONTOSINICIAIS 1000
+#define PONTOSINICIAIS 0
 #define NUMEROSECRETO20 20
 
 /*
 lorem ipsum
 */
-int chute;
-int tentativas = 1;
 int pontos = PONTOSINICIAIS;
-int acertou1 = NUMEROSECRETO20;
+int acertou;
 
-void qualonumero(void)
+int pegar_chute_do_usuario(void)
 {
+  int chute;
+
   printf("********************************\n");
   printf("Qual o número inteiro de 0 até 25 você chuta?\n");
   scanf("%d", &chute);
   printf("Seu chute foi %d!\n", chute);
   printf(":D\n");
+
+  return chute;
 }
+
 void iniciodojogo(void)
 {
   printf("********************************\n");
@@ -31,22 +34,18 @@ void iniciodojogo(void)
   printf("Contagem de pontos = 1000\n");
 }
 
-void acertou(void)
+void somar_a_pontos(int valor)
 {
-  int acertou = chute == acertou1;
-  pontos = pontos + chute;
-  printf("Parabéns!! Você acertou\n");
-  printf("***********************\n");
-  printf("*** CONTAGEM DE PONTOS = %d ***\n", pontos);
-  printf("Você acertou em %d tentativas\n", tentativas);
+  pontos = pontos + valor;
 }
 
 void jogo1(void)
 {
-  qualonumero();
-
+  int tentativas = 1;
   while (tentativas <= 15)
   {
+    // pegar_chute_do_usuario();
+    int chute = pegar_chute_do_usuario();
     if (chute < 0)
     {
       printf("Você não pode chutar menores que zero, tente novamente\n");
@@ -58,9 +57,14 @@ void jogo1(void)
       continue;
     }
 
-    if (acertou)
+    if (chute == NUMEROSECRETO20)
     {
-      acertou1();
+      somar_a_pontos(chute);
+
+      printf("Parabéns!! Você acertou\n");
+      printf("***********************\n");
+      printf("*** CONTAGEM DE PONTOS = %d ***\n", pontos);
+      printf("Você acertou em %d tentativas\n", tentativas);
       break;
     }
 
@@ -82,12 +86,13 @@ void jogo1(void)
       printf("Número de tentativas %d\n", tentativas);
       printf("*** CONTAGEM DE PONTOS = %d ***\n", pontos);
     }
+
     tentativas++;
   }
 }
+
 int main(void)
 {
   iniciodojogo();
-
   jogo1();
 }
